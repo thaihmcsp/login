@@ -6,7 +6,10 @@ import * as path from "path";
 import IndexRoute from "./routes/index.route";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-const Port = process.env.PORT;
+import { getConfig } from "./configs/config";
+const config = getConfig();
+
+const Port = config.auth.port;
 const app: Express = express();
 
 app.use(cors());
@@ -27,7 +30,6 @@ app.use("*", (req: Request, res: Response) => {
 
 app.listen(Port, async () => {
   await mongoose.connect("mongodb://127.0.0.1:27017/loginDB");
-  // eslint-disable-line
   console.log("DB connected");
   console.log(`http://localhost:${Port}/`);
 });

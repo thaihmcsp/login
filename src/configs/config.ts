@@ -12,6 +12,9 @@ export const getConfig = () => {
   if (process.env.COOKIE_NAME) {
     config.auth.cookie_name = process.env.COOKIE_NAME;
   }
+  if (process.env.PORT) {
+    config.auth.port = process.env.PORT;
+  }
 
   return config;
 };
