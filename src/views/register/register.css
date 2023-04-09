@@ -1,0 +1,11 @@
+.register_wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: auto;
+}
+
+.register_wrap input {
+  padding: 8px;
+  margin: 8px 0;
+}

@@ -9,5 +9,9 @@ export const getConfig = () => {
     config.auth.jwt_exp = process.env.JWT_EXP;
   }
 
+  if (process.env.COOKIE_NAME) {
+    config.auth.cookie_name = process.env.COOKIE_NAME;
+  }
+
   return config;
 };

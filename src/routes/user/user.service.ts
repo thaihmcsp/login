@@ -4,6 +4,7 @@ import { compare, hash } from "bcrypt";
 import { errorFilter } from "../../common/error.filter";
 import { sign, verify } from "jsonwebtoken";
 import { getConfig } from "../../configs/config";
+import { RequestType } from "../../constants/request.type";
 
 const config = getConfig();
 
@@ -35,12 +36,27 @@ export const login = async (req: Request, res: Response) => {
       return res.status(400).json({ message: "wrong password" });
     }
 
-    const { password: userPass, ...publicUser } = user._doc;
+    const { password: userPass, token: newToken, ...publicUser } = user._doc;
     const token = user.genToken();
 
     await UserModel.updateOne({ username }, { token });
 
     res.status(200).json({ token, user: publicUser });
+  } catch (error) {
+    errorFilter(error, req, res);
+  }
+};
+
+export const logout = async (req: RequestType, res: Response) => {
+  try {
+    if (!req.user) {
+      return res.status(400).json({ message: "not loged in" });
+    }
+
+    const { username } = req.user;
+    await UserModel.updateOne({ username }, { token: "" });
+
+    res.status(200).json({ message: "loged out" });
   } catch (error) {
     errorFilter(error, req, res);
   }

@@ -1,6 +1,7 @@
 {
   "auth": {
     "jwt_password": "default",
-    "jwt_exp": "1 day"
+    "jwt_exp": "1 day",
+    "cookie_name": "login_user"
   }
 }

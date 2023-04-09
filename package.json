@@ -2,32 +2,50 @@
   "name": "login",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
-    "build": "npx tsc",
-    "start": "node dist/app.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\""
+    "clean": "rimraf dist/",
+    "copy-assets": "copyfiles -u 1 src/**/*.ejs src/**/*.css dist/",
+    "lint": "tslint -c tslint.json -p tsconfig.json --fix",
+    "tsc": "tsc",
+    "build": "npm-run-all clean tsc copy-assets",
+    "dev:start": "npm-run-all build start",
+    "dev": "nodemon --watch src -e ts,ejs --exec npm run dev:start",
+    "start": "node ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/cors": "^2.8.13",
+    "@types/ejs": "^3.1.2",
     "@types/express": "^4.17.17",
+    "@types/fs-extra": "^11.0.1",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "^18.15.11",
+    "@types/shelljs": "^0.8.11",
     "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-device": "^0.4.2",
     "fastest-validator": "^1.16.0",
+    "fs-extra": "^11.1.1",
     "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.4",
     "mongoose": "^7.0.3",
-    "ts-node": "^10.9.1"
+    "npm-run-all": "^4.1.5",
+    "shelljs": "^0.8.5",
+    "ts-node": "^10.9.1",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
-    "concurrently": "^8.0.1"
+    "@types/cookie-parser": "^1.4.3",
+    "@types/jquery": "^3.5.16",
+    "concurrently": "^8.0.1",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^4.4.1"
   }
 }

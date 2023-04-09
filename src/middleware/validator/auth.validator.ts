@@ -23,9 +23,11 @@ export const validateRegister = async (
     if (isValid !== true) {
       const result = checkValid(isValid);
 
-      return res.status(400).json({ message: result });
+      return res.status(400).json(result);
     }
 
     next();
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };

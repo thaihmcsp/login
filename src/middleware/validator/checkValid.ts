@@ -8,7 +8,7 @@ export const checkValid = (check: ValidationError[]): CheckValid => {
     };
   }
 
-  const checkMessage = check.map((c) => c.message).join(` `);
+  const checkMessage = check.map((c) => c.message).join(` \n`);
 
   return {
     isValid: false,
