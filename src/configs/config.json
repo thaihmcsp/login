@@ -1,0 +1,6 @@
+{
+  "auth": {
+    "jwt_password": "default",
+    "jwt_exp": "1 day"
+  }
+}
